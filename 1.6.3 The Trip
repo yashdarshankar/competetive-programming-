@@ -1,0 +1,29 @@
+import math
+output = []
+while True:
+    m = int(input())
+    if m == 0:
+        break
+    list1 = []
+    sum1 = 0
+    sum2 = 0
+    for i in range(m):
+        x = float(input())
+        list1.append(x)
+        sum1 += x
+    sum1 = float(sum1 / m)
+    # print(sum1)
+    r1 = math.ceil(sum1 * 100) / 100
+    r2 = math.floor(sum1 * 100) / 100
+    # print(r1, r2)
+    for i in range(int(m / 2)):
+        list1[i] = list1[i] - r1
+    for i in range(int(m / 2), int(m)):
+        list1[i] = list1[i] - r2
+    # print(list1)
+    for i in list1:
+        sum2 += abs(i)
+    sum2 = sum2 / 2
+    output.append(sum2)
+for i in output:
+    print("{0:.2f}".format(i))
