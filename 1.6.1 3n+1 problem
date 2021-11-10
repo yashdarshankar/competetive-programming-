@@ -1,0 +1,14 @@
+a = int(input("enter the first number :- "))
+b = int(input("enter the second number :- "))
+maximum = 0
+for i in range(a, b+1):
+    length = 1
+    while(i != 1):
+        if i % 2 != 0:
+            i = 3*i+1
+        elif i%2 == 0:
+            i /= 2
+        length += 1
+    if length >= maximum:
+        maximum = length
+print(maximum)
