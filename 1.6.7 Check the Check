@@ -1,0 +1,207 @@
+import copy
+
+count = 1
+while True:
+
+    m = n = 8
+    m2 = -1
+    n2 = -1
+    m3 = -1
+    n3 = -1
+
+    matrix = [["." for k in range(int(n))] for k in range(int(m))]
+    orgMatrix1 = copy.deepcopy(matrix)
+
+
+    def blackPawn():
+        mat = matrix[matrix.index(i) + 1][i.index(j) + 1]
+        if mat == "." or mat == "K" or mat == "k":
+            mat = "*"
+
+
+    def whitePawn():
+        mat = matrix[matrix.index(i) - 1][i.index(j) - 1]
+        mat = "*"
+        mat = "*"
+
+
+    def Rook():
+        for r1 in range(m):
+            mat = matrix[r1][i.index(j)]
+            if mat == matrix[matrix.index(i)][i.index(j)]:
+                continue
+            if mat == "." or mat == "K" or mat == "k":
+                mat = "*"
+        for r1 in range(n):
+            mat = matrix[matrix.index(i)][r1]
+            if mat == "." or mat == "K" or mat == "k":
+                matrix[matrix.index(i)][r1] = "*"
+
+
+    def Knight():
+        mat = matrix[matrix.index(i) - 1][i.index(j) - 2]
+        mat = "*"
+        mat = "*"
+        mat = "*"
+        mat = "*"
+        mat = "*"
+        mat = "*"
+        mat = "*"
+        mat = "*"
+
+
+    def Bishop():
+        for bishop in range(8):
+            m1 = matrix.index(i) - bishop
+            n1 = i.index(j) + bishop
+
+            if m1 == -1 or n1 == -1 or m1 == 8 or n1 == 8:
+                break
+            elif matrix[m1][n1] == matrix[matrix.index(i)][i.index(j)]:
+                continue
+            mat = matrix[m1][n1]
+            if mat == "." or mat == "K" or mat == "k":
+                matrix[m1][n1] = "*"
+
+        for bishop1 in range(8):
+            m1 = matrix.index(i) + bishop1
+            n1 = i.index(j) + bishop1
+
+            if m1 == -1 or n1 == -1 or m1 == 8 or n1 == 8:
+                break
+            elif matrix[m1][n1] == matrix[matrix.index(i)][i.index(j)]:
+                continue
+            mat = matrix[m1][n1]
+            if mat == "." or mat == "K" or mat == "k":
+                matrix[m1][n1] = "*"
+
+        for bishop in range(8):
+            m1 = matrix.index(i) - bishop
+            n1 = i.index(j) - bishop
+
+            if m1 == -1 or n1 == -1 or m1 == 8 or n1 == 8:
+                break
+            elif matrix[m1][n1] == matrix[matrix.index(i)][i.index(j)]:
+                continue
+            mat = matrix[m1][n1]
+            if mat == "." or mat == "K" or mat == "k":
+                matrix[m1][n1] = "*"
+        for bishop in range(8):
+            m1 = matrix.index(i) + bishop
+            n1 = i.index(j) - bishop
+
+            if m1 == -1 or n1 == -1 or m1 == 8 or n1 == 8:
+                break
+            elif matrix[m1][n1] == matrix[matrix.index(i)][i.index(j)]:
+                continue
+            mat = matrix[m1][n1]
+            if mat == "." or mat == "K" or mat == "k":
+                matrix[m1][n1] = "*"
+
+
+    for i in range(m):
+        l = input().split(" ")
+        for j in range(n):
+            matrix[i][j] = l[j]
+            if l[j] == "K":
+                m2 = i
+                n2 = j
+            if l[j] == "k":
+                m3 = i
+                n3 = j
+    if matrix == orgMatrix1:
+        break
+    orgMatrix = copy.deepcopy(matrix)
+    # White King
+    if m2 > -1:
+        for i in matrix:
+            for j in i:
+                if j == "p":
+                    blackPawn()
+
+                elif j == "r":
+                    Rook()
+
+                elif j == "b":
+                    Bishop()
+
+                elif j == "q":
+                    Bishop()
+                    Rook()
+
+                elif j == "n":
+                    Knight()
+
+    if matrix[m2][n2] == "*":
+        print(str(count) + ". White king is in check")
+    # Black king
+    if m3 > -1:
+
+        matrix = orgMatrix
+
+        for i in matrix:
+            for j in i:
+                if j == "P":
+                    whitePawn()
+                elif j == "R":
+                    Rook()
+                elif j == "B":
+                    Bishop()
+
+                elif j == "Q":
+                    Bishop()
+                    Rook()
+                elif j == "N":
+                    Knight()
+
+    if matrix[m3][n3] == "*":
+        print(str(count) + ". Black king is in check")
+    count = int(count) + 1
+ ###################################################################################
+ C:\Users\HP\PycharmProjects\Practice\venv\Scripts\python.exe "C:/Users/HP/PycharmProjects/CompetetiveProgramming/1.6.7 Check the Check.py"
+. . k . . . . .
+p p p . p p p p
+. . . . . . . .
+. R . . . B . .
+. . . . . . . .
+. . . . . . . .
+P P P P P P P P
+K . . . . . . .
+1. Black king is in check
+r n b q k . n r
+p p p . . p p p
+. . . . p . . .
+. . . p . . . .
+. b P P . . . .
+. . . . . N . .
+P P . . P P P P
+R N B Q K B . R
+2. White king is in check
+. . k . . . . .
+. . . . . . . .
+. . . . . . . .
+. R . . . B . .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+3. Black king is in check
+. . k . . . . .
+p p p . p p p p
+. . . . . . . .
+. R . . . B . .
+. . . . . . . .
+. . . . . . . .
+P P P P P P P P
+K . . . . . . .
+4. Black king is in check
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+. . . . . . . .
+
+Process finished with exit code 0
